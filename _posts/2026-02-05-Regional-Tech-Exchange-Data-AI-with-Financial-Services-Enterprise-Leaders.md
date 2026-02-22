@@ -2,7 +2,6 @@
 title: "Unlocking Innovation through AI, Governance, and Data, an IBM TechXchange Workshop"
 subtitle: "A behind‑the‑scenes look at the first stop of IBM’s regional TechXchange Workshop at the IBM Innovation Studio in Washington, DC"
 date: 2026-02-05
-author: "Henry Xiao"
 tags:
   - AI
   - Data

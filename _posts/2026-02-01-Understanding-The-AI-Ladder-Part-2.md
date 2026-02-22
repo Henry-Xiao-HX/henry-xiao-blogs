@@ -1,7 +1,6 @@
 ---
 title: "Understanding the AI Ladder Part 2"
 subtitle: "A walkthrough of IBM’s AI Ladder and how organizations move from collecting data to infusing AI into an enterprise"
-author: "Henry Xiao"
 date: 2026-02-01
 tags:
   - AI
@@ -14,7 +13,6 @@ tags:
 In the last post we have learned about the AI Ladder. Let's see it in action - in a fictitious insurance company: Henry-Insurance
 
 ## Table of Contents
-- [Overview](#overview)
 - [Example: Applying the AI Ladder in an Insurance Scenario: Henry-Insurance](#example-applying-the-ai-ladder-in-an-insurance-scenario-henry-insurance)
 - [Conclusion](#conclusion)
 - [Additional Resources](#additional-resources)

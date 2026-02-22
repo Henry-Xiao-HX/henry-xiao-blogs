@@ -2,7 +2,6 @@
 title: "Evaluating ML/GenAI Models"
 subtitle: ""
 date: 2026-02-17
-author: "Henry Xiao"
 tags:
   - AI
   - Data

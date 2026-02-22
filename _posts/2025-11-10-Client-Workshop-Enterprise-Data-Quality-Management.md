@@ -2,12 +2,10 @@
 title: "Client Workshop: Enterprise Data Quality Management"
 subtitle: "Turning Data Into Intelligence: Reflections From a Recent Workshop with a Financial Services Client"
 date: 2025-11-10
-author: "Henry Xiao"
 tags:
   - AI
   - Data
   - IBM
-  - Enterprise AI
   - watsonx
 ---
 

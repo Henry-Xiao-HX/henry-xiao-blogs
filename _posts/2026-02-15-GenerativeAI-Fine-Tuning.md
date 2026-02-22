@@ -2,7 +2,6 @@
 title: "Fine Tuning Generative AI models with Parameter-Efficient Fine-Tuning(PEFT) with InstructLab"
 subtitle: ""
 date: 2026-02-15
-author: "Henry Xiao"
 tags:
   - AI
   - Data

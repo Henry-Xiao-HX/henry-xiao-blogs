@@ -1,7 +1,6 @@
 ---
 title: "Looking Back: Building a Retrieval-Augmented Generation (RAG) Solution in 2023"
 date: 2026-01-25
-author: "Henry Xiao"
 tags:
   - AI
   - Data
