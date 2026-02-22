@@ -9,7 +9,7 @@ theme: jekyll-theme-chirpy
 lang: en
 
 # Change to your timezone › https://zones.arilyn.cc
-timezone:
+timezone: America/Los_Angeles
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
@@ -27,13 +27,13 @@ description: >- # used by seo meta and the atom feed
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
-url: "https://Henry-Xiao-HX.github.io"
+url: "https://henry-xiao-hx.github.io"
 
 github:
   username: Henry-Xiao-HX # change to your GitHub username
 
-# twitter:
-#   username: twitter_username # change to your Twitter username
+twitter:
+  username: twitter_username # change to your Twitter username
 
 social:
   # Change to your full name.
@@ -155,7 +155,7 @@ pwa:
 paginate: 10
 
 # The base URL of your site
-baseurl: ""
+baseurl: "/henry-xiao-blogs"
 
 # ------------ The following options are not recommended to be modified ------------------
 
