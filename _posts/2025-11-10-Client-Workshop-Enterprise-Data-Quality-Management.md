@@ -7,6 +7,7 @@ tags:
   - Data
   - IBM
   - watsonx
+category: ["IBM","My IBM Stories"]
 ---
 
 

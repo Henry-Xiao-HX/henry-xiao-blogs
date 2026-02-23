@@ -4,11 +4,10 @@ subtitle: ""
 date: 2026-02-15
 tags:
   - AI
-  - Data
-  - IBM
   - Enterprise AI
-  - watsonx
+category: ["AI","LLM"]
 mermaid: true
+
 ---
 
 Back in 2024, my team and I fine-tuned a Lllama model leveraging InstrutLab and Large-scale Alignment for Chatbot (LAB) method: generating synthetic data with a teacher model, and performing Parameter-Efficient-Fine-Tuning (PEFT) to inject IBM Risk Atlas domain expertise into the opensource generative AI model. 

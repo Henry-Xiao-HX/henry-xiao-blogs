@@ -1,6 +1,12 @@
 ---
 title: "Driving Compliance to BCBS239 with Data Lineage"
 date: 2025-12-01
+category: ["IBM","My IBM Stories"]
+tags:
+  - AI
+  - Data
+  - IBM
+  - watsonx
 ---
 
 

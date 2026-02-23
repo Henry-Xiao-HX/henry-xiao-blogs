@@ -4,10 +4,9 @@ subtitle: "A walkthrough of IBM’s AI Ladder and how organizations move from co
 date: 2026-01-31
 tags:
   - AI
-  - Data
   - IBM
   - Enterprise AI
-  - watsonx
+category: ["AI", "Enterprise AI"]
 ---
 
 *The AI Ladder: Accelerate Your Journey to AI*, authored by Rob Thomas, IBM Senior Vice President, offers a practical roadmap for business leaders navigating rapid technological change. In this post, I will share some of my key takeaways and draw on my experience helping Financial Services enterprises implement Data and AI solutions to illustrate what this journey looks like in practice.

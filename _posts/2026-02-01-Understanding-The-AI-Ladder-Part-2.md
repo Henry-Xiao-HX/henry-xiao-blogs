@@ -4,10 +4,9 @@ subtitle: "A walkthrough of IBM’s AI Ladder and how organizations move from co
 date: 2026-02-01
 tags:
   - AI
-  - Data
   - IBM
   - Enterprise AI
-  - watsonx
+category: ["AI", "Enterprise AI"]
 ---
 
 In the last post we have learned about the AI Ladder. Let's see it in action - in a fictitious insurance company: Henry-Insurance

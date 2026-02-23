@@ -4,10 +4,8 @@ subtitle: ""
 date: 2026-02-17
 tags:
   - AI
-  - Data
-  - IBM
   - Enterprise AI
-  - watsonx
+category: ["AI", "ML Ops"]
 mermaid: true
 ---
 

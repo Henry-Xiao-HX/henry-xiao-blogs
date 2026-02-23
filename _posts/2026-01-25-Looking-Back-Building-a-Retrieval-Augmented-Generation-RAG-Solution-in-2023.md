@@ -3,10 +3,8 @@ title: "Looking Back: Building a Retrieval-Augmented Generation (RAG) Solution i
 date: 2026-01-25
 tags:
   - AI
-  - Data
   - IBM
-  - Enterprise AI
-  - watsonx
+category: ["IBM","My IBM Stories"]
 ---
 
 This RAG project started as a simple side experiment with my colleague Brian Paskin back in *2023*. What began as a small weekend curiosity quickly revealed how Retrieval-Augmented-Generation can help mitigate some of the short comings of Large Language Models at the time

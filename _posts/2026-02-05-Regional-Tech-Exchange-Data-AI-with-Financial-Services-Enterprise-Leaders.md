@@ -8,6 +8,7 @@ tags:
   - IBM
   - Enterprise AI
   - watsonx
+category: ["IBM","My IBM Stories"]
 ---
 
 We hosted the first stop of our regional TechXchange workshop at the IBM Innovation Studio in Washington, DC back in August 2025. In this blog, I will share some of my takeaways as an architect and a presenter of the workshop for financial services leaders.  
