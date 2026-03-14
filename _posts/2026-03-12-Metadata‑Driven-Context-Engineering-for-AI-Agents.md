@@ -8,7 +8,8 @@ tags:
   - IBM
   - watsonx
   - Data
-category: ["AI", "LLM"]
+  - Agentic AI
+category: ["AI", "Agentic AI"]
 mermaid: true
 ---
 

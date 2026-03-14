@@ -8,6 +8,7 @@ tags:
   - IBM
   - Enterprise AI
   - watsonx
+  - Career
 category: ["IBM","My IBM Stories"]
 ---
 

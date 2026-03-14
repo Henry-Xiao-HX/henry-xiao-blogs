@@ -4,7 +4,7 @@ subtitle: ""
 date: 2026-02-15
 tags:
   - AI
-  - Enterprise AI
+  - LLM
 category: ["AI","LLM"]
 mermaid: true
 

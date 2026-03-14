@@ -4,9 +4,10 @@ subtitle: ""
 date: 2026-02-24
 tags:
   - AI
-  - Enterprise AI
   - IBM
-  - watsonx
+  - Career
+  - LLM
+  - Agentic AI
 category: ["AI", "Career"]
 mermaid: true
 ---

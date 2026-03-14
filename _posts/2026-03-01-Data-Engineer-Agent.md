@@ -7,6 +7,7 @@ tags:
   - Enterprise AI
   - IBM
   - watsonx
+  - Agentic AI
 category: ["AI", "Agentic AI"]
 mermaid: true
 ---

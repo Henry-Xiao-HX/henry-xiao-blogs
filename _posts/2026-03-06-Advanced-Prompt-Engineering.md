@@ -4,6 +4,8 @@ subtitle: ""
 date: 2026-03-06
 tags:
   - AI
+  - LLM
+  - Career
 category: ["AI", "LLM"]
 mermaid: true
 ---

@@ -4,7 +4,7 @@ subtitle: ""
 date: 2026-02-17
 tags:
   - AI
-  - Enterprise AI
+  - ML Ops
 category: ["AI", "ML Ops"]
 mermaid: true
 ---
