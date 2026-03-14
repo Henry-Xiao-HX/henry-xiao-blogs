@@ -4,9 +4,10 @@ subtitle: "A deliberately simple experiment with LangChain, and Ollama."
 date: 2026-03-13
 tags:
   - AI
-  - IBM
-  - watsonx
-category: ["AI", "LLM"]
+  - Career
+  - LLM
+  - Agentic AI
+category: ["AI", "Agentic AI"]
 mermaid: true
 ---
 
@@ -22,7 +23,7 @@ So over this weekend, I built an AI agent that reads what’s in my fridge, reme
 
 ![](../assets/img/posts-assets/personal-chef-agent.png)
 
-This post walks through the design, the decisions, and what I *didn’t* build.
+This post walks through the design, the decisions, and what I *didn’t* build. Full code here: https://github.com/Henry-Xiao-HX/personal-chef-agent
 
 ***
 
