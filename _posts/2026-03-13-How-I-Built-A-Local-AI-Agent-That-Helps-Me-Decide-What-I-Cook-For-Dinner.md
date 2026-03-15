@@ -1,5 +1,5 @@
 ---
-title: "How I Built a Local AI Agent That Helps Me Decide What to Cook for Dinner"
+title: "I Built a Local AI Agent To Help Decide What to Cook for Dinner"
 subtitle: "A deliberately simple experiment with LangChain, and Ollama."
 date: 2026-03-13
 tags:
@@ -14,7 +14,7 @@ mermaid: true
 
 I spend most of my professional time working on Data & AI systems with layered complexities: distributed data and applications, production constraints, observability, safety, and scale.
 
-This personal project intentionally explores the opposite direction: simplicity. The inspiration? A very ordinary problem that happens to all of us: deciding what to cook for dinner with whatever is in the fridge. And if you know me, you know I am a big FOODIE. 
+This personal project intentionally explores the opposite direction: simplicity. The inspiration? A very ordinary problem that happens to all of us: deciding what to cook for dinner with whatever is in the fridge. And if you know me, you know I am a BIG foodie. *check out my food blogs linked in ABOUT*
 
 So over this weekend, I built an AI agent that reads what’s in my fridge, remembers my food preferences, suggests recipes for dinner, and learns from our conversations histories. Before starting, I imposed a constraint on myself to keep the system simple and local. The result is a small agent that runs entirely on my laptop, stores state in markdown files, and uses Ollama for local model inference. It may not be reliable or scalable, but it certainly is fun!
 
@@ -27,6 +27,31 @@ This post walks through the design, the decisions, and what I *didn’t* build. 
 
 ***
 
+
+## DISCLAIMER: What makes this an AI agent
+
+The term AI agent is sometimes used too loosely, often describing systems that are little more than a prompt wrapped in an API call. This project is intentionally minimal, but it still follows the core structural pattern of an LLM agent.
+
+An AI agent is a software program that perceives its environment, reasons about it, and takes actions that affect that environment (observe -> reason -> act). The key difference is operating not in a single prompt-response step, but embedded inside a control loop that interacts with an external environment.
+
+In my case, the environment is simply a local filesystem. The agent can read the current state (fridge contents and preferences), reason about it, and update that state when new information emerges, creating a closed feedback loop. 
+
+A couple design choices that reinforce the agentic behavior: 
+
+**Persistent memory**
+The agent maintains external state across sessions. Instead of treating each interaction independently, it accumulates knowledge over time, allowing future decisions to incorporate past preferences and inventory changes.
+
+**Reflection-based learning**
+At the end of each session, the agent performs a reflection pass over the conversation to identify new preferences and update persistent state. This is analogous to AutoGPT style reflection, acts as lightweight memory consolidation, and resembles experience replay in reinforcement learning: distilling short-term interactions into long-term knowledge without complicating the main loop.
+
+From an architectural perspective, this produces a minimal agent structure:
+
+* an LLM embedded in a control loop
+* tool-mediated interaction with an environment
+* persistent external state
+* a reflection mechanism for updating long-term memory
+
+The implementation here is intentionally lightweight, but the pattern (observe -> reason -> act) is the same one that appears in larger agent systems. 
 
 ## Some architectural design
 At its core, everything is just files and a controlled agent loop:
@@ -139,40 +164,57 @@ This allows casual statements like:
 
 > “I’m really into spicy food lately”
 
-to become persistent knowledge - without me having to tell the agent every time what I like to eat.
+to become persistent knowledge without me having to tell the agent every time what I like to eat.
 
-This pattern - session-scoped reflection rather than continuous memory updates - is something I’ve found useful in larger systems as well.
+This pattern, session scoped reflection rather than continuous memory updates, is something I’ve found useful in larger systems as well.
 
 
 ***
 
 ## What would change in production
 
-Of course, all of these falls apart in a real production system: then we need to think about support for multiple users, prompt injections, scalability, and reliability. 
+Of course, all of these falls apart in a real production system: then we need to think about support for multiple users, prompt injections, scalability, reliability, and so much more good stuff. 
 
-#### State & concurrency
+### State & concurrency
 
-Markdown files don’t scale.
+Markdown files don’t scale and doesn't handle concurrent updates
+
+What if you live with your partner and they updated the preferences file while you ask for a recipe - suddenly, the agent suggests mint chocolate chip ice cream, which you absolutely hate.
+
 Production systems need structured storage, concurrency control, and versioning.
 
-#### Security & tool access
+>Lock the state file per session, or serialize updates to ensure only one process writes at a time. Even simple file-based locks prevent most conflicts in a small multi-user setup. 
+{:.prompt-tip}
+
+### Security & tool access
 
 Local trust doesn’t translate to shared systems.
-Right now, I am the only user. 
+Right now, I am the only user. What if a guest "accidentally" did some prompt injection, and tricked the agent to suggest shellfish for dinner, even though I'm allergic? 
+
 In production:
 - Tool access must be scoped
 - Write operations must be validated
 - Prompt injection becomes a real threat
 
-#### Context management
+>Limit tool access to trusted scripts or authenticated users, and sanitize input/output. Even a rudimentary whitelist of allowed operations greatly reduces risk.
+{:.prompt-tip}
+
+### Context management
 
 As conversation history grows, you need summarization strategies, context window management, explicit memory boundaries. 
 
-#### Observability
+### Observability
 
-Verbose logs are great locally. Production requires structured logs, tracing across agent steps, clear visibility into tool usage for audibility. 
+Verbose logs are great locally. 
 
-#### Model operations
+What if the agent suddenly recommends 10 eggs for a single omelet. Did it misread inventory, preferences, or mistaken me as a dinosaur with a huge appetite?
+
+Production requires structured logs, tracing across agent steps, clear visibility into tool usage for audibility. 
+
+>Add structured logs for each reasoning step and tool call. Even basic timestamped JSON logs help trace errors.
+{:.prompt-tip}
+
+### Model operations
 
 Local models are fine for personal use. At scale, you need versioning, rollout strategies, and fallbacks.
 
