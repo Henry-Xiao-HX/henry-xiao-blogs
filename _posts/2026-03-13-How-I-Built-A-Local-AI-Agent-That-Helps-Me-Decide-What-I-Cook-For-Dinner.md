@@ -18,7 +18,7 @@ This personal project intentionally explores the opposite direction: simplicity.
 
 So over this weekend, I built an AI agent that reads what’s in my fridge, remembers my food preferences, suggests recipes for dinner, and learns from our conversations histories. Before starting, I imposed a constraint on myself to keep the system simple and local. The result is a small agent that runs entirely on my laptop, stores state in markdown files, and uses Ollama for local model inference. It may not be reliable or scalable, but it certainly is fun!
 
-> Me: I am feeling some comfort food today...
+> Me: I want to make something hearty today, maybe a stew?
 {:.prompt-tip}
 
 ![](../assets/img/posts-assets/personal-chef-agent.png)
