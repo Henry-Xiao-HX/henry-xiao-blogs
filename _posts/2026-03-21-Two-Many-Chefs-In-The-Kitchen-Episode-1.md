@@ -1,7 +1,7 @@
 ---
 title: "Two Many Chefs in the Kitchen: Episode 1. More Problems Than Solutions"
 subtitle: "Introducing our short series Two Many Chefs in the Kitchen exploring challenges in putting AI into production"
-date: 2026-03-13
+date: 2026-03-22
 tags:
   - AI
   - Career
