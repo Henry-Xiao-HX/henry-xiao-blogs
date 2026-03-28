@@ -1,7 +1,7 @@
 ---
 title: "Mock Interview: Customer Success Engineer"
 subtitle: ""
-date: 2026-02-24
+date: 2026-02-26
 tags:
   - AI
 category: ["AI", "LLM"]
@@ -11,6 +11,9 @@ mermaid: true
 I recently chatted with my college friends who are going through interviews for deployed engineer positions. As I looked through their interview prep, I realized that it's eerily similar to my role as a Customer Success Engineer at IBM. Client-facing engineer bringing strong technical chops and interpersonal story-telling. Sprinkle in a little bit of enterprise knowledge (familiarity with a particular industry would be a huge plus here). Now, this role may take on different names. At IBM, we are called Customer Success Engineers. Some companies call us Customer Success Managers, Product Managers, Solution Architects, Sales Engineers, or Technical Sales Engineers. The names are not important, the job description is: they can navigate the "latent space" between raw model and a production-grade application. That got me thinking, how would I answer those mock interview questions? 
 
 I am going to use IBM/LangChain/Anthropic as examples here. After all, these are the companies leading the charge in helping enterprises adopt AI. 
+
+## 0. Introduction: Who AM I? 
+I am working in IBM as Data & AI customer success engineers dedicated to clients in financial services markets. I started at IBM 3 years ago as an AI engineer in the client engineering team. If you remember that's right about the time everyone is crazed about LLMs (looking at you ChatGPT). As part of the client engineering team we do rapid Proof-of-Concepts, which at the time focused a lot on RAG (Retrieval Augmented Generations). We use watsonx.ai as the model platform, llama and granite models, and ElasticSearch as the vector database, and 
 
 ## 1. Why are you interested in LangChain, our deployed team and your understanding of our offering at a high level
 
