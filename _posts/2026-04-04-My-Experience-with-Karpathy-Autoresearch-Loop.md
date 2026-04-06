@@ -95,7 +95,7 @@ The model is a transformer architecture utilizing a [decoupled optimization stra
 *   Context Length: 2048
 *   [MFU (Model FLOPs Utilization)](#model-flops-utilization-mfu): 0.29%
 > At 0.29%, the GPU is mostly idling; the bottleneck isn't the hardware, but the agent overhead (waiting for the LLM to think).
-*   [Baseline *BPB*](#bits-per-byte-): 1.378380
+*   [Baseline *BPB*](#bits-per-byte-bpb): 1.378380
 > This is our test score. Bits-Per-Byte measures how well the model predicts data. Lower is better.
 
 | commit  | val_bpb  | memory_gb | status  | description                                                                 |
