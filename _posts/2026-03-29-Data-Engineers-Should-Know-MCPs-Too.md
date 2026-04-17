@@ -1,5 +1,5 @@
 ---
-title: "Data Engineers Should Know MCPs, too"
+title: "Agentic Data Engineering with IBM Bob"
 subtitle: "Agentic AI and its place in data integration and data intelligence"
 date: 2026-03-29
 tags:
@@ -11,11 +11,11 @@ category: ["AI", "Agentic AI"]
 mermaid: true
 ---
 
-Data engineering has deep roots. While our stack evolves from on-premise clusters to hybrid clouds, the mission remains constant: ensuring data integrity, availability, and movement. For the veteran architect who has mastered the data fabric-from designing complex ETL/ELT patterns to real-time streaming-a cynical question often arises: If our core challenges haven't changed since the pre-LLM era, why should we care about AI?
+In the generative AI era, the core data engineering challenges persist: ensuring data integrity and availability. For the veteran architect building a data fabric, from designing complex ETL/ELT patterns to real-time streaming, the introduction of AI agents often feel like an unnecessary layer of non-deterministic complexity.  
 
-![alt text](../assets/img/posts-assets/data_fabric.png)
+The value of AI in this space is not to replace the logic of data movement, but in scaling the operational intelligence required to manage it.
 
-The answer lies not in replacing the logic of data movement, but in scaling the operational intelligence required to manage it.
+![alt text](../assets/img/posts-assets/agentic_data_intelligence.png)
 
 ## The Agentic Shift
 We are entering the era of Agentic Data Engineering, where AI agents function as autonomous extensions of the engineering team. Unlike standard chatbots that merely suggest code, these agents are functional entities capable of:
@@ -33,12 +33,12 @@ What enabled this shift? How is Agentic Data Engineering possible?
 To move from "Chat" to "Agent," three components must converge: Reasoning, Interoperability, and Codification.
 
 ### 1. The Brain: Reasoning over Pattern Matching
-The difference-maker in modern tools (such as IBM Bob) is the shift from stochastic text generation to Chain-of-Thought reasoning. A true data agent doesn't just match a regex pattern; it understands context. It can orchestrate multi-step workflows, execute changes across a repository, and self-correct by evaluating execution logs against the original architectural goal.
+IBM Bob's capability to reason and utilize tools is the difference-maker. . A true data agent doesn't just match a regex pattern; it understands context. It can orchestrate multi-step workflows, execute changes across a repository, and self-correct by evaluating execution logs against the original architectural goal.
 
 ### 2. The Nervous System: Model Context Protocol (MCP)
 If the LLM is the brain, the Model Context Protocol (MCP) is the nervous system. MCP is a standardized, open-source orchestration layer that creates a universal interface between LLMs and the data stack.
 
-While traditional LLMs are isolated, MCP enables agents to interact directly with live environments—Snowflake, Postgres, or dbt. It transforms the AI into a runtime-integrated operator. Once you deploy an MCP server for your data catalog or warehouse, any AI agent can "inspect" the environment to make informed, data-driven decisions rather than hallucinating based on training data.
+While traditional LLMs are isolated, MCP enables agents to interact directly with live environments—Snowflake, Postgres, or dbt. It transforms the AI into a runtime-integrated operator, allowing the agent to "inspect" schema definitions and execution logs rather than relying on static training data.
 
 ### 3. The Action Space: Codifying with Python SDKs
 To empower an agent, we must provide a structured "action space." This is where Python SDKs become critical. By wrapping complex data logic into executable Python modules, we turn static infrastructure into a machine-readable API.

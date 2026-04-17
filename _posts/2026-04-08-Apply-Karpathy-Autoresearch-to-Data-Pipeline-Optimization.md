@@ -10,7 +10,7 @@ category: ["AI", "Agentic AI"]
 mermaid: true
 ---
 
-This article documents a technical experiment applying Andrej Karpathy's Autoresearch methodology, originally designed for ML model optimization, to data engineering infrastructure. The project explores whether an autonomous agent can systematically optimize data pipelines by navigating the trade-offs between speed, cloud cost, and resource utilization.
+This article documents a technical experiment applying Andrej Karpathy's Autoresearch methodology, originally designed for ML model optimization, to data engineering infrastructure. The project explores how an autonomous agent can optimize data pipelines by navigating the trade-offs between speed, cloud cost, and resource utilization. You can try out this project yourself at [Getting Started](#getting-started) or skip to the [Experiment Results](#experiment-results)
 
 ---
 
@@ -42,16 +42,100 @@ The agent operates in a continuous cycle, utilizing Git to manage state and reco
     * **Keep:** If the score increases, the change is committed.
     * **Discard:** If the score decreases or the script crashes, the branch is reset via `git reset --hard`.
 
-### Permitted Changes
-The agent is permitted to experiment with:
+### Experiments
+The agent is can experiment with:
 * Data Layout: Partitioning keys, bucket counts, and sort orders.
 * Storage Formats: Toggling between Parquet, ORC, Avro, or Feather.
 * Query Logic: Adjusting join strategies and predicate pushdown.
 * Resource Allocation: Tuning memory fractions and parallelism levels.
 
+Or any code in `pipeline.py` where it thinks can improve the performance. 
+
 ---
 
-## Experimental Results
+## Getting Started
+#### 1. Clone the repository 
+```bash
+git clone https://github.com/Henry-Xiao-HX/auto-data-pipeline-optimization.git
+```
+
+#### 2. Install dependencies
+
+```bash
+#Install uv if you don't have it
+curl -LsSf https://astral.sh/uv/install.sh | sh
+#Install project dependencies
+uv sync
+```
+
+#### 3. Generate baseline dataset 
+```bash
+#Generate 1M record synthetic dataset (~100MB)
+python generate_dataset.py
+```
+This command creates: 
+- `~/.cache/autoinfra/data/data.parquet` - Main dataset (Parquet with snappy compression)
+- `~/.cache/autoinfra/data/data.csv` - CSV version for comparison
+- `~/.cache/autoinfra/data/data.feather` - Feather version for comparison
+- `~/.cache/autoinfra/data/partitioned/` - Pre-partitioned versions for testing
+
+#### 4. Run baseline to verify set up
+```bash
+uv run pipeline.py
+```
+Expected output: 
+```bash
+================================================================================
+INFRASTRUCTURE OPTIMIZATION EXPERIMENT
+================================================================================
+
+Configuration:
+  File Format:        parquet
+  Compression:        snappy
+  Partition Columns:  None
+  Column Pruning:     True
+  Predicate Pushdown: True
+  Cache Intermediate: False
+  Chunk Size:         100,000
+
+Dataset Directory:  /Users/you/.cache/autoinfra/data
+Time Budget:        300s
+================================================================================
+
+Running pipeline...
+
+Total execution time: 2.3s
+
+---
+efficiency_score:     0.8542
+latency_seconds:      2.1
+cost_dollars:         0.0012
+resource_health:      87.5
+throughput_mb_s:      48.2
+data_processed_gb:    0.1
+peak_memory_gb:       0.8
+cpu_utilization_pct:  65.3
+data_correct:         True
+
+================================================================================
+EXPERIMENT COMPLETED SUCCESSFULLY
+================================================================================
+
+```
+
+#### 5. Start Autonomous Optimization
+Point your AI agent (Claude, GPT-4, etc.) to infrastructure_program.md and let it run. 
+```
+Hi, have a look at infrastructure_program.md and let's kick off a new experiment! Let's do the setup first.
+```
+The agent will:
+
+- Try different configurations
+- Keep improvements, discard regressions
+- Log all results to infra_results.tsv
+
+
+## Experiment Results
 
 Below is the execution log (`infra_results.tsv`) from a recent trial run. The agent performed 16 experiments before I stopped its execution to find the optimal configuration for a local dataset.
 
