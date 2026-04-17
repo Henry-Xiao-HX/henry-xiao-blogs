@@ -12,6 +12,8 @@ mermaid: true
 
 This article documents a technical experiment applying Andrej Karpathy's Autoresearch methodology, originally designed for ML model optimization, to data engineering pipeline. The project explores how an autonomous agent (IBM Bob) can optimize data pipelines by navigating the trade-offs between speed, cloud cost, and resource utilization. You can try out this project yourself at [Getting Started](#getting-started) or skip to the [Experiment Results](#experiment-results)
 
+I chose IBM Bob as the AI agent, primarily because its specific handling of structured reasoning and tool-calling felt suited for the iterative, "think-then-act" nature of this framework. Over the course of 20 autonomous experiment iterations, Bob achieved a `+11.3%` improvement over the baseline score. 
+
 ![alt text](../assets/img/posts-assets/karpathy_experiments_data.png)
 
 ---
@@ -20,7 +22,7 @@ This article documents a technical experiment applying Andrej Karpathy's Autores
 
 The experiment is built on a contract that isolates the agent’s creative freedom from the evaluation logic. This ensures that the agent can iterate rapidly without compromising the integrity of the benchmarking environment.
 
-1.  **`Program.md`:** Defines the environment, including the dataset (1M record synthetic sample) and the tooling (e.g., `uv` for dependency management).
+1.  **`Program.md`:** Defines the environment, including the dataset (synthetic data) and the tooling (e.g., `uv` for dependency management).
 2.  **`baseline_config.py`:** A read-only file containing the scoring logic, dataset paths, and a fixed 5-minute time budget. The agent cannot modify this file, preventing "cheating" or metric manipulation.
 3.  **`pipeline.py`:** The only file the agent is permitted to edit. It contains the logic for data pipeline, including data layout(partitioning keys, bucket counts, and sort orders), storage format compression technique, and query logic, etc.
 
@@ -31,19 +33,19 @@ The experiment is built on a contract that isolates the agent’s creative freed
 
 The agent operates in a continuous cycle, utilizing Git to manage state and record progress:
 
-1.  **Mutation:** The agent modifies a specific infrastructure lever in `pipeline.py`.
-2.  **Benchmarking:** The pipeline is executed for a maximum 5 minutes.
-3.  **Scoring:** An efficiency score is calculated using the following objective function:
+1.  Mutation: The agent modifies a specific infrastructure lever in `pipeline.py`.
+2.  Benchmarking: The pipeline is executed for a maximum 5 minutes.
+3.  Scoring: An efficiency score is calculated using the following objective function:
     ```
     efficiency_score = w1 * (1/latency_seconds) + w2 * (1/cost_dollars) + w3 * resource_health_score
     ```
     Where:
-    - **latency_seconds**: Total query execution time (lower is better)
-    - **cost_dollars**: Cloud compute/storage cost for the run (lower is better)
-    - **resource_health_score**: 0-100 metric based on memory/CPU utilization (higher is better, penalizes OOM or thrashing)
-4.  **Decision:**
-    * **Keep:** If the score increases, the change is committed.
-    * **Discard:** If the score decreases or the script crashes, the branch is reset via `git reset --hard`.
+    - latency_seconds: Total query execution time (lower is better)
+    - cost_dollars: Cloud compute/storage cost for the run (lower is better)
+    - resource_health_score: 0-100 metric based on memory/CPU utilization (higher is better, penalizes OOM or thrashing)
+4.  Decision:
+    * Keep: If the score increases, the change is committed.
+    * Discard: If the score decreases or the script crashes, the branch is reset via `git reset --hard`.
 
 ### Experiments
 The agent can experiment with:
@@ -127,7 +129,7 @@ EXPERIMENT COMPLETED SUCCESSFULLY
 ```
 
 #### 5. Start Autonomous Optimization
-Point your AI agent (Claude, IBM Bob, etc.) to infrastructure_program.md and let it run. 
+Point your AI agent IBM Bob to infrastructure_program.md and let it run. 
 ```
 Hi, have a look at infrastructure_program.md and let's kick off a new experiment! Let's do the setup first.
 ```
@@ -137,6 +139,15 @@ The agent will:
 - Keep improvements, discard regressions
 - Log all results to infra_results.tsv
 
+Note: You need to auto-approve a few tools, i.e. Bob will automatically complete the action without your permission. We need to approve: `Read` (view your files and directory content), `Write` (Create, edit, and save files to your directory), `Question response`(after the time limit expires, select the first answer from the provided options), `Execute` (run commands in your terminal), and `Subtasks`(create and complete subtasks). 
+
+>We can further approve Bob to only execute certain commands such as `uv run python`, `ls`, `git diff`, etc, to lower the risk. 
+{:.prompt-info}
+
+>This step is necessary for autonomous optimization, allowing Bob to run by itself while you grab a cup of coffee and came back to an improved pipeline with verifiable experiment history :) 
+{:.prompt-tip}
+
+![alt text](../assets/img/posts-assets/bob_karpathy_data_start.png)
 
 ## Experiment Results
 
