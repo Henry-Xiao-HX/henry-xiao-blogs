@@ -56,6 +56,10 @@ The agent can experiment with:
 
 Or any code in `pipeline.py` where it thinks can improve the performance. 
 
+* Complexity vs. Gain: The experiment prioritizes simplicity. If an optimization adds significant code complexity for a marginal gain, it is discarded.
+* Shift in Responsibility: The human role shifts from writing manual configurations to defining the weights of the objective function. The effort is spent on ensuring the evaluation harness (`baseline_config.py`) is robust.
+
+
 ---
 
 ## Getting Started
@@ -191,7 +195,7 @@ Below is the execution log (`infra_results.tsv`) from a recent trial run. The ag
 ---
 
 ### Technical Observations
-The optimization loop demonstrated that for this specific workload, standard "best practices" often introduced more overhead than they resolved. A breakdown of the logic during key iterations:
+The optimization loop demonstrated that for this specifically small workload, standard best practices introduced more overhead than they resolved. A breakdown of the logic during key iterations:
 
 1.  Format Selection: Early testing identified that Parquet (`02792de`) was suboptimal for this dataset size, leading to a focus on Feather.
 2.  Overhead Reduction: The search identified that features like intermediate caching (`80677de`) added serialization penalties that exceeded re-computation costs.
@@ -207,11 +211,12 @@ By the final commit (`e7e5ac5`), the pipeline was simplified, maximizing the thr
 The most significant gain resulted from removing unnecessary defensive copies. Minimizing memory allocation reduced latency from 4.7s to 4.2s and dropped per-unit cost to $0.0050. Notably, attempts to use `inplace=True` (`b461c1c`) and categorical dtypes (`860bbfd`) regressed performance due to engine-level conversion overhead.
 
 #### 2. Storage & I/O
-Testing confirmed that for this workload, Feather outperforms Parquet (`02792de`), which saw a ~9.2% drop in efficiency. While Snappy is common, zstd provided a superior balance of compression ratio and decompression speed for our specific throughput requirements.
+For this workload, Feather outperforms Parquet (`02792de`), which saw a ~9.2% drop in efficiency. While Snappy is common, zstd provided a superior balance of compression ratio and decompression speed for our specific throughput requirements.
 
 #### 3. Counter-Intuitive Regressions
 * Caching: Disabling the intermediate cache (`80677de`) provided a +4.3% boost, as the transformation logic proved faster than the I/O penalty of serialized caching.
 * Column Pruning: Disabling pruning (`803d263`) caused the most severe regression, with efficiency dropping by 25.6% and memory usage spiking to 7.3GB.
+* "Optimal" configurations are highly dependent on the dataset and hardware. A configuration that wins on a 100MB dataset may not hold at 100TB.
 
 ### Final Configuration
 * Format: Feather (zstd compression)
@@ -221,11 +226,9 @@ Testing confirmed that for this workload, Feather outperforms Parquet (`02792de`
 ---
 
 ## Final thoughts
-* Complexity vs. Gain: The experiment utilizes a "Simplicity Criterion." If an optimization adds significant code complexity for a marginal gain, it is discarded.
-* Shift in Responsibility: The human role shifts from writing manual configurations to defining the weights of the objective function. The effort is spent on ensuring the evaluation harness (`baseline_config.py`) is robust.
-* Environment Specificity: The results suggest that "optimal" configurations are highly dependent on the dataset and hardware. A configuration that wins on a 100MB dataset may not hold at 100TB.
+The 11.3% efficiency gain achieved by IBM Bob is impressive, but the real takeaway isn't the specific configuration. For me, it's the shift in methodology. By applying Karpathy’s Autoresearch framework, my role transitioned from manually tweaking chunk sizes and compression techniques to defining the "rules of the game" in `baseline_config.py`. This moves the engineering effort: I am guiding the AI agent to discover the best solution. As data volumes scale, the "optimal" pipeline becomes a moving target that varies by hardware, dataset skew, and cloud pricing. This project suggests a future where data engineers spend less time in the weeds of trial-and-error and more time designing the objective functions that allow agents like IBM Bob to find peak performance autonomously.
 
-This framework is still in the experimental phase, but early results indicate that the "Research Loop" is a viable method for automating the more repetitive aspects of infrastructure tuning.
+
 
 ## Appendix 
 Using synthetically generated data. 
